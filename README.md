@@ -2,11 +2,21 @@
 
 Complete guide to directly control the built-in RGB side-LED bars on **iiyama ProLite Android touchscreens** (e.g., TW1523AS / TW1623AS / TW2223AS series) from **Home Assistant** over ADB — without relying on third-party apps or Tasker.
 
-## Prerequisites: Enable ADB on the Touchscreen
+## Prerequisites
+
+### 1. Enable ADB on the Touchscreen
 1. Open Android **Settings > About tablet** (or **About device**) on the touchscreen.
 2. Tap **Build number** **7 times** until *"You are now a developer!"* appears.
 3. Go back to **Settings > System > Developer options**.
 4. Enable **USB debugging** and **Network debugging / Wireless ADB** (port `5555`).
+
+### 2. Install ADB Tools (if running from Home Assistant Terminal)
+If you run the ADB commands directly from the Home Assistant SSH/Terminal add-on, install `android-tools` first:
+```bash
+apk add android-tools
+```
+*(When connecting for the first time with `adb connect`, check **Always allow from this computer** and tap **Allow** on the touchscreen popup).*
+
 
 ## 1. Hardware & Kernel Details
 The RGB side-LED strips on these iiyama displays are driven directly by the Rockchip GPIO/PWM kernel driver via `/dev/led_gpio` using `ioctl` calls:
